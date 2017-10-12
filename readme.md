@@ -7,13 +7,13 @@
 
 # layout and styling !
 
-  *create header and footer partials
-  *Add in bootstrap
+  * create header and footer partials
+  * Add in bootstrap
 
 
-#creatin new locations
+# creating new locations
 
-  *setup new campground Post route
-  *Add in body parser
-  *setup route to show form
-  *add basic style
+  * setup new campground Post route
+  * Add in body parser
+  * setup route to show form
+  * add basic style
