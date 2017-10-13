@@ -1,0 +1,16 @@
+<% include partials/header%>
+
+<h1>This is the location page</h1>
+<a href="/locations/new">add a new</a>
+<%locations.forEach(function (locations) { %>
+    <div>
+
+        <h4><%=locations.name%></h4>
+        <img src="<%=locations.img%>">
+    </div>
+
+
+<%})%>
+
+
+<% include partials/footer%>

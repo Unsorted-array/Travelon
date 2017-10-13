@@ -1,0 +1,14 @@
+{
+  "name": "v2",
+  "version": "1.0.0",
+  "description": "firstLayout",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Unsorted-array",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2"
+  }
+}
