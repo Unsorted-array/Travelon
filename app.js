@@ -5,38 +5,17 @@ var mongoose = require('mongoose');
 
 app.use(bodyparser.urlencoded({extended : true}))
 
-var locations =[ {name : "Manali" ,img : "https://farm5.staticflickr.com/4085/4837609363_0ec4a8c9b3.jpg"},
-    ,
-    {name : "leh" ,img : "https://farm8.staticflickr.com/7356/9669339783_6fd63cef04.jpg"},
-    {name : "kullu" ,img : "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg"},
-    {name : "leh" ,img : "https://farm8.staticflickr.com/7356/9669339783_6fd63cef04.jpg"},
-    {name : "kullu" ,img : "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg"},
-    {name : "kullu" ,img : "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg"},
-    {name : "leh" ,img : "https://farm8.staticflickr.com/7356/9669339783_6fd63cef04.jpg"},
-    {name : "leh" ,img : "https://farm8.staticflickr.com/7356/9669339783_6fd63cef04.jpg"}
-]
 
 mongoose.connect("mongodb://localhost/travelon",{useMongoClient:true});
 // schema setup
 
 var locationsSchema= new mongoose.Schema({
     name: String,
-    img: String
+    img: String,
+    description : String
 })
 
-var locations = mongoose.model("locations",locationsSchema);
-
-
-locations.create({name : "kullu" ,img : "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg"},function (err, locations) {
-    if(err)
-    {
-        console.log(err)
-    }
-    else {
-        console.log(locations);
-    }
-
-});
+var location = mongoose.model("location",locationsSchema);
 
 
 app.set('view engine','ejs')
@@ -45,28 +24,71 @@ app.get('/',function (req,res) {
     res.render("landing")
 })
 
-
+// index route
 app.get('/locations',function (req,res) {
 
-    res.render("location",{locations :locations })
+    location.find({},function (err,locations) {
+        if(err)
+        {
+            console.log(err);
+        }
+        else {
+           // console.log(locations);
+            res.render("location",{locations :locations})
+
+        }
+
+    })
+
+
 
 })
 
+// add a new route
 app.get('/locations/new',function (req,res) {
 
     res.render('new')
 })
 
+// create route !
 app.post('/locations',function (req,res) {
     //get data from form and add to array
     // redirect back to campgrounds page
     var name = req.body.name;
     var image =req.body.img;
-    var newlocation ={name:name,img:image};
-    locations.push(newlocation);
-    res.redirect('/locations')
+    var desc =req.body.description;
+    var newlocation ={name:name,img:image,description:desc};
+    location.create(newlocation,function (err,newlycreated) {
+        if(err)
+        {
+            console.log(err);
+        }
+        else {
+            res.redirect('/locations')
+
+        }
+    })
 
 
+
+
+
+})
+
+
+// show route for the process
+app.get("/locations/:id",function (req,res) {
+
+    location.findById(req.params.id ,function (err,found) {
+        if(err)
+        {
+            console.log("error");
+        }
+        else {
+            res.render("show",{location2:found});
+
+        }
+    });
 
 })
 

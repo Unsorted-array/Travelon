@@ -7,16 +7,19 @@
 
 # layout and styling !
 
-  *create header and footer partials
-  *Add in bootstrap
+  * create header and footer partials
+  * Add in bootstrap
 
 
-# creatin new locations
+# creating new locations
+
+
 
   * setup new campground Post route
   * Add in body parser
   * setup route to show form
   * add basic style
+
 
 # style the Navbar and form
 
@@ -27,3 +30,9 @@
   * Install and configure mongoose
   * Setup location model
   * use the model to the project
+
+# Show Page
+
+  * Add description to our locations
+  * Add description for our campground model
+  * new schema use
